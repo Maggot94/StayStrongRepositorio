@@ -18,12 +18,6 @@ public class Enemigo : MonoBehaviour {
 	public int StateAttack;
 
 	//----- parte roger---
-	public GameObject enemy;
-
-	public Transform spawnPoint;
-
-	private float spawner = 0f;
-
 
 	// Use this for initialization
 	void Start () {
@@ -97,17 +91,14 @@ public class Enemigo : MonoBehaviour {
 			vida = vida - 10;
 			//Debug.Log("vida - 1");
 		}
-		if (vida <= 0)
+		if (vida == 0)
 		{
-			Invoke("Spawner", spawner);
+            NotificationCenter.DefaultCenter().PostNotification(this, "AnotherEnemy");
+            NotificationCenter.DefaultCenter().PostNotification(this, "SetCountText");
 			Destroy(gameObject);
 		}
 	}
 
-	void Spawner()
-	{
-		Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
-	}
 }
 
 

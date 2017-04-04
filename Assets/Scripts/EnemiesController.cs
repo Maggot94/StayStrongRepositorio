@@ -7,33 +7,20 @@ public class EnemiesController : MonoBehaviour
 {
 
 	public Transform spawnPoint;
-
 	public GameObject Enemy;
-
-
-
-
-
-
-	// Use this for initialization
 
 	void Start ()
 	{
-		Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);   
-
+		Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+        NotificationCenter.DefaultCenter().AddObserver(this, "AnotherEnemy");
 	}
 
-	/*void Respawn()
+    private void AnotherEnemy()
     {
-        if (GameObject.Find("Enemy").GetComponent<Enemy>().death)
-        {
-            EnemyGenerator();
-        }
+        Invoke("SpawnEnemy", 1f);
     }
-    void EnemyGenerator()
+    void SpawnEnemy()
     {
-         Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
     }
-    */
-
 }
