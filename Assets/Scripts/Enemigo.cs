@@ -1,14 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
 
 public class Enemigo : MonoBehaviour {
 
 	public int vida = 100; 
 	private Animator Ataques; 
+	public Image life; 
 
-	public float TimeAttack = 8f; 
-	public float stay = 10f; 
+
+	//--------------
+
+
+	public GameObject pow; 
+
+
+
+	public float TimeAttack = 3f; 
+	public float stay = 5f; 
 
 	private BoxCollider2D attack; 
 	public bool rigth = false;
@@ -17,7 +27,16 @@ public class Enemigo : MonoBehaviour {
 
 	public int StateAttack;
 
+	public Vector3 mousePos ; 
+
+
 	//----- parte roger---
+	void Awake (){
+
+		life.fillAmount = 1f; 
+		vida = 100; 
+
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +44,7 @@ public class Enemigo : MonoBehaviour {
 		Ataques = GetComponent<Animator> (); 
 		attack = GetComponent<BoxCollider2D> (); 
 	
-		
+	
 	}
 	
 	// Update is called once per frame
@@ -35,8 +54,9 @@ public class Enemigo : MonoBehaviour {
 
 		
 			stay -= Time.deltaTime;
+			//pow.SetActive (false);
 		}
-		if (stay <= 8f) {
+		if (stay <= 3f) {
 			
 			Ataques.SetInteger ("Attack", 0); 
 			TimeAttack -= Time.deltaTime; 
@@ -47,7 +67,7 @@ public class Enemigo : MonoBehaviour {
 
 		if (TimeAttack <= 0) {
 			
-			stay = 10f; 
+			stay = 5f; 
 			NextAttackBool = true; 
 		}
 			
@@ -68,7 +88,7 @@ public class Enemigo : MonoBehaviour {
 			//attack.enabled = true;
 			left = true; 
 			NextAttackBool = false; 
-			TimeAttack = 8f;
+			TimeAttack = 3f;
 
 		}
 
@@ -78,7 +98,7 @@ public class Enemigo : MonoBehaviour {
 			//attack.enabled = true; 
 			rigth = true; 
 			NextAttackBool = false; 
-			TimeAttack = 8f;
+			TimeAttack = 3f;
 		}
 
 
@@ -88,7 +108,10 @@ public class Enemigo : MonoBehaviour {
 	{
 		if(Input.GetMouseButtonDown(0))
 		{
-			vida = vida - 10;
+			vida = vida - 2;
+			life.fillAmount -= 0.02f; 
+			pow.SetActive (true);
+
 			//Debug.Log("vida - 1");
 		}
 		if (vida == 0)
