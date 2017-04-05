@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class Player : MonoBehaviour {
@@ -132,13 +133,15 @@ public class Player : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
+	void OnTriggerEnter2D(Collider2D other)
+    {
+		life = life - 10; 
+		Debug.Log (life);
+        if(life == 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
 		
-	//	if (other.gameObject.tag == "Enemy") { 
-			
-			life = life - 10; 
-			Debug.Log (life);
-		//}
 	}
 
 }

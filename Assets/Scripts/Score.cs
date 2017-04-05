@@ -20,4 +20,5 @@ public class Score : MonoBehaviour
         count = count + 100;
         countText.text = "Score:" + count.ToString();
     }
+    
 }
