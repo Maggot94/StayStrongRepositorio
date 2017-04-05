@@ -15,9 +15,16 @@ public class Player : MonoBehaviour {
 	public bool defense = false; 
 	public float defensetime = 2f;
 
+	public CameraShake cs; 
+
+	public float damagetime = 1f; 
+	public bool isDamage = false; 
+
+
 	private Animator Dodge; 
 
 	public Enemigo ene; 
+
 
 	float startTime; 
 	float endTime;
@@ -45,6 +52,19 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		/*if (isDamage == true) {
+			damagetime -= Time.deltaTime; 
+			if (damagetime <= 0) {
+
+				Dodge.SetInteger ("Dodge", 0); 
+				isDamage = false; 
+				damagetime = 1f;
+			}
+           
+
+		}
+		*/
 
 		if (defense == true) {
 
@@ -134,9 +154,12 @@ public class Player : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		
-	//	if (other.gameObject.tag == "Enemy") { 
-			
-			life = life - 10; 
+	       
+		    //Dodge.SetInteger ("Dodge",3);
+		    //isDamage = true;
+		    cs.ShakeCamera (10f, 0.1f);
+		    life = life - 10; 
+		    vida.fillAmount -= 0.1f; 
 			Debug.Log (life);
 		//}
 	}
